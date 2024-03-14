@@ -1,0 +1,46 @@
+<h2>Nueva Orden de Compra</h2>
+<mat-form-field>
+  <mat-label>Seleccione un Cliente</mat-label>
+  <mat-select [(value)]="clienteSeleccionado" >
+    <mat-option *ngFor="let cliente of clientes" [value]="cliente">
+      {{ cliente.nombre }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<table mat-table [dataSource]="articulos">
+  <ng-container matColumnDef="idArticulo">
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let element"> {{element.idArticulo}} </td>
+  </ng-container>
+  <ng-container matColumnDef="codigo">
+    <th mat-header-cell *matHeaderCellDef> Código </th>
+    <td mat-cell *matCellDef="let element"> {{element.codigo}} </td>
+  </ng-container>
+  <ng-container matColumnDef="nombre">
+    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+    <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+  </ng-container>
+  <ng-container matColumnDef="precioUnitario">
+    <th mat-header-cell *matHeaderCellDef> Precio Unitario</th>
+    <td mat-cell *matCellDef="let element"> {{element.precioUnitario | currency}} </td>
+  </ng-container>
+  <ng-container matColumnDef="agregado">
+    <th mat-header-cell *matHeaderCellDef> Seleccionado</th>
+    <td mat-cell *matCellDef="let element"> {{element.agregado}} </td>
+  </ng-container>
+  <ng-container matColumnDef="acciones">
+    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button color="primary" [disabled]="estaAgregado(element)" (click)="seleccionarArticulo(element)"> <mat-icon>add_shopping_cart</mat-icon></button>
+      <button mat-icon-button color="warn" [disabled]="!estaAgregado(element)" (click)="eliminarArticulo(element)"> <mat-icon>delete</mat-icon></button>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<mat-paginator #paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+</mat-paginator>
+<div class="row">
+  <button mat-raised-button color="primary" type="submit" (click)="crearOrden()">Crear Orden</button>
+  <button mat-raised-button color="secundary" (click)="cancelar()">Cancelar</button>
+</div>

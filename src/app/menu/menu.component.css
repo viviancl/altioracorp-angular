@@ -1,0 +1,21 @@
+nav {
+  background-color: #3f51b5; /* Color de fondo gris claro */
+}
+
+ul {
+  list-style-type: none;
+  margin: 5px;
+  padding: 5px;
+  display: flex;
+  margin-bottom: 40px;
+}
+
+li {
+  margin-right: 20px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
